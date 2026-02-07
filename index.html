@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gullu & Puchhu ❤️</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Audio -->
+  <audio id="bgMusic" src="romantic.mp3" preload="auto"></audio>
+
+  <!-- Floating hearts -->
+  <div id="hearts-container"></div>
+
+  <!-- MAIN CONTENT -->
+  <main id="mainScreen" class="container">
+    <h1 id="title">Will you be my Valentine? 💘</h1>
+
+    <div class="button-wrapper">
+      <button id="yesBtn" class="btn yes">Yes</button>
+      <button id="noBtn" class="btn no">No</button>
+    </div>
+  </main>
+
+  <!-- FINAL ROMANTIC SCREEN -->
+  <section id="finalScreen" class="final hidden">
+    <h1>You just made my world brighter ✨</h1>
+    <p>
+      Every heartbeat smiles a little more today.<br>
+      Thank you for choosing us, choosing love… choosing me! ❤️
+    </p>
+    <div class="final-hearts">💖 💕 💘 💞</div>
+  </section>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal hidden">
+    <div class="ticket">
+      <div class="ticket-header">
+        <h2>It’s a Date! 💘</h2>
+        <p class="sub">Official Boarding Pass</p>
+      </div>
+
+      <div class="ticket-body">
+        <div class="row">
+          <div>
+            <span class="label">DATE:</span>
+            <span class="value">Tonight</span>
+          </div>
+          <div>
+            <span class="label">TIME:</span>
+            <span class="value">8:00 PM</span>
+          </div>
+        </div>
+
+        <div class="includes">
+          <span class="label">Includes (but not limited to):</span>
+          <ul>
+            <li>✅ Romantic Candlelight Dinner</li>
+            <li>✅ Unlimited Cuddles</li>
+            <li>✅ 1x Cute Boyfriend</li>
+            <li>✅ Late Night (Censored 😈)</li>
+          </ul>
+        </div>
+
+        <button id="confirmBtn" class="confirm-btn">
+          Confirm reservation 💌
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
