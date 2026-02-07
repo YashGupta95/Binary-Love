@@ -7,6 +7,11 @@ const mainScreen = document.getElementById("mainScreen");
 const finalScreen = document.getElementById("finalScreen");
 const music = document.getElementById("bgMusic");
 const heartsContainer = document.getElementById("hearts-container");
+const finalTitle = finalScreen.querySelector("h1");
+const finalText = finalScreen.querySelector("p");
+
+const finalTitleText = finalTitle.innerHTML;
+const finalTextContent = finalText.innerHTML;
 
 /* HEARTS */
 const heartEmojis = ["💖","💕","💘","💓","💗"];
@@ -35,6 +40,17 @@ const messages = [
   "Playing hard to get, girl? 😌",
   "Nice try, hot stuff! 😉",
   "I promise I'm fun! 😎",
+  "Nice reflexes. Wrong choice 😄",
+  "That button moves faster than your excuses 😏",
+  "Some stories don't have a 'No' ending 💞",
+  "You're closer than you think 🥰",
+  "Love called. It says 'try again' ☺️",
+  "Even your fingers know the truth 💕",
+  "Resistance is… adorable 😌",
+  "You're smiling, I know it 😌",
+  "One click away from destiny 😉",
+  "Don't fight the butterflies 🦋",
+  "Oops… missed it by a heartbeat 💓"
 ];
 
 /* NO BUTTON — SAFE POSITIONING */
@@ -101,6 +117,7 @@ yesBtn.addEventListener("click", () => {
 
 /* CONFIRM RESERVATION */
 confirmBtn.addEventListener("click", () => {
+  heartBurstEffect(confirmBtn);
   modal.classList.add("hidden");
 
   tease.textContent = "";
@@ -108,4 +125,70 @@ confirmBtn.addEventListener("click", () => {
 
   mainScreen.remove();
   finalScreen.classList.remove("hidden");
+
+  // Clear before typing
+  finalTitle.innerHTML = "";
+  finalText.innerHTML = "";
+
+  // Sequential typing
+  typeWriter(finalTitle, finalTitleText, 90, () => {
+    typeWriter(finalText, finalTextContent, 60);
+  });
 });
+
+function heartBurstEffect(container) {
+  const heartCount = 12;
+  for (let i = 0; i < heartCount; i++) {
+    const heart = document.createElement("div");
+    heart.classList.add("heart-burst");
+    heart.textContent = "💖";
+
+    // random direction
+    const dx = (Math.random() - 0.5) * 160 + "px";
+    const dy = -Math.random() * 160 + "px";
+    const rot = (Math.random() * 90 - 45) + "deg";
+
+    heart.style.setProperty("--dx", dx);
+    heart.style.setProperty("--dy", dy);
+    heart.style.setProperty("--rot", rot);
+
+    // position at center of button
+    const rect = container.getBoundingClientRect();
+    const heartSize = 85; // must match CSS font-size
+    heart.style.left = rect.left + rect.width / 2 - heartSize / 2 + "px";
+    heart.style.top = rect.top + rect.height / 2 - heartSize / 2 + "px";
+
+    document.body.appendChild(heart);
+
+    // auto remove
+    setTimeout(() => {
+      document.body.removeChild(heart);
+    }, 1600);
+  }
+}
+
+function typeWriter(element, content, speed = 70, onComplete) {
+  let i = 0;
+  element.innerHTML = "";
+
+  function type() {
+    if (content.substring(i, i + 4) === "<br>") {
+      element.innerHTML += "<br>";
+      i += 4;
+    } else if (content.substring(i, i + 5) === "<br/>") {
+      element.innerHTML += "<br/>";
+      i += 5;
+    } else {
+      element.innerHTML += content.charAt(i);
+      i++;
+    }
+
+    if (i < content.length) {
+      setTimeout(type, speed);
+    } else if (typeof onComplete === "function") {
+      onComplete();
+    }
+  }
+
+  type();
+}
