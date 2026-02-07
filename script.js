@@ -103,7 +103,24 @@ noBtn.addEventListener("click", () => {
     teaseLeft = Math.max(minLeft, Math.min(teaseLeft, maxLeft));
 
     tease.style.left = teaseLeft + "px";
-    tease.style.top = y - 35 + "px";
+
+    const teaseHeight = tease.offsetHeight;
+    // Preferred position: above button
+    let teaseTop = y - teaseHeight - 10;
+
+    // Check if above is unsafe
+    const overlapsProtectedArea =
+      teaseTop < protectedArea.bottom &&
+      teaseTop + teaseHeight > protectedArea.top;
+
+    const outOfViewportTop = teaseTop < 8;
+
+    // If unsafe above → place below button
+    if (overlapsProtectedArea || outOfViewportTop) {
+      teaseTop = y + noBtn.offsetHeight + 10;
+    }
+
+    tease.style.top = teaseTop + "px";
 
     tease.style.visibility = "visible";
   });
