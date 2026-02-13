@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
 }
 
 body {
@@ -52,10 +51,39 @@ body {
 }
 
 h1 {
-  color: black;
   font-size: 2.6rem;
   margin-bottom: 40px;
   font-family: 'Playfair Display', serif;
+
+  /* Shiny gradient text */
+  background: linear-gradient(
+    120deg,
+    #7a001f 0%,
+    #ff6fa5 25%,
+    #ffffff 50%,
+    #ff6fa5 75%,
+    #7a001f 100%
+);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  /* Clean border */
+  -webkit-text-stroke: 1.2px rgba(150, 0, 0, 0.7);
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 0.4);
+
+  animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
 }
 
 .button-wrapper {
@@ -70,7 +98,7 @@ h1 {
   font-size: 18px;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
   letter-spacing: 0.4px;
@@ -81,6 +109,7 @@ h1 {
 .yes {
   background: #ff4f8b;
   color: black;
+  box-shadow: 0 8px 18px rgba(255, 79, 139, 0.35);
 }
 
 .no {
@@ -133,18 +162,40 @@ h1 {
 
 /* TICKET */
 .ticket {
-  background: white;
+  position: relative;
   width: 90%;
   max-width: 420px;
   border-radius: 22px;
   overflow: hidden;
-  animation: pop 0.35s ease;
   font-family: 'Poppins', sans-serif;
+  animation: pop 0.35s ease;
+
+  /* Gradient border setup */
+  padding: 3px; /* border thickness */
+  background: linear-gradient(
+    120deg,
+    #ff4f8b,
+    #ffffff,
+    #ff4f8b,
+    #ffffff
+  );
+  background-size: 300% 300%;
+  animation: pop 0.35s ease, borderShine 8s linear infinite;
 }
 
 @keyframes pop {
   from { transform: scale(0.7); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes borderShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.ticket > * {
+  background: white;
+  border-radius: 19px; /* 22 - padding(3px) */
 }
 
 .ticket-header {
@@ -225,6 +276,7 @@ h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
   font-family: 'Playfair Display', serif;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .final p {
